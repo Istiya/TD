@@ -78,6 +78,9 @@ public class TurretController : MonoBehaviour
     public void Unselect()
     {
         isSelected = false;
+
+        Destroy(GetComponent<LineRenderer>());
+
         foreach (MeshRenderer renderer in rend)
         {
             renderer.material.color = _model.defaultColot;
@@ -90,6 +93,8 @@ public class TurretController : MonoBehaviour
         {
             return;
         }
+
+        CircleDrawer.DrawCircle(gameObject, _model.range, 0.05f);
 
         foreach (MeshRenderer renderer in rend)
         {

@@ -167,7 +167,7 @@ MonoBehaviour:
   enemyTag: Enemy
   sprite: {fileID: 21300000, guid: 37171e2e93b33634aa3fea2ad4ac8dd6, type: 3}
   turretName: MGs Turret
-  range: 5
+  range: 8
   turnSpeed: 10
   fireRate: 1
   cost: 250

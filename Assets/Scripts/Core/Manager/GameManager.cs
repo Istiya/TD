@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager? instance = null;
 
-    private int health;
-    private int money;
-    private int score;
+    private int health = 0;
+    private int money = 0;
+    private int score = 0;
 
     public event Action<int>? OnHealthChange;
     public event Action<int>? OnMoneyChange;
@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
         InitControllers();
         Instantiate(PrefabManager.instance.Get(PrefabType.UI));
         Instantiate(PrefabManager.instance.Get(PrefabType.MAP), transform.position, Quaternion.identity);
+
+        OnMoneyChange?.Invoke(money);
     }
     private void InitControllers()
     {

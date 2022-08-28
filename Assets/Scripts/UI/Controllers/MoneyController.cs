@@ -6,6 +6,7 @@ public class MoneyController : MonoBehaviour
     public static MoneyController instance;
 
     public TMP_Text money;
+
     private void Awake()
     {
         if (instance == null)
@@ -17,7 +18,6 @@ public class MoneyController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        money.text = GameManager.instance.GetMoney().ToString() + "$";
         GameManager.instance.OnMoneyChange += ChangeMoney;
     }
 

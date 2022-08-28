@@ -1,24 +1,41 @@
+using System;
 using UnityEngine;
+
+#nullable enable
 
 public class ChoosenTurretController : MonoBehaviour
 {
     public static ChoosenTurretController instance;
 
     Ray ray;
-    MeshRenderer[] rend;
+    MeshRenderer[] renderers;
+    TurretModel _model;
+
+    public PrefabType turret;
+    public int cost;
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if(instance != null)
-        {
-            Destroy(instance);
-        }
+        instance = this;
 
-        rend = GetComponentsInChildren<MeshRenderer>();
+        renderers = GetComponentsInChildren<MeshRenderer>();
+        
+        _model = GetComponent<TurretModel>();
+
+        GetComponent<BoxCollider>().enabled = false;
+
+        CircleDrawer.DrawCircle(gameObject, _model.range, 0.05f);
+
+        if(TurretInfoPanel.instance != null)
+        {
+            Destroy(TurretInfoPanel.instance.gameObject);
+        }
+    }
+
+    public void Init(PrefabType turret, int cost)
+    {
+        this.turret = turret;
+        this.cost = cost;
     }
 
     private void Update()
@@ -33,7 +50,9 @@ public class ChoosenTurretController : MonoBehaviour
                 if (!node.isTowerPlaced)
                 {
                     SetVisibility(true);
-                    transform.position = raycastHit.transform.position;
+                    Vector3 position = raycastHit.transform.position;
+                    position.y += 0.05f;
+                    transform.position = position;
                 }
                 else
                 {
@@ -58,13 +77,19 @@ public class ChoosenTurretController : MonoBehaviour
 
     void SetVisibility(bool visibility)
     {
-        rend[0].enabled = visibility;
-        rend[1].enabled = visibility;
+        foreach(MeshRenderer rend in renderers)
+        {
+            rend.enabled = visibility;
+        }
+
+        GetComponent<LineRenderer>().enabled = visibility;
     }
 
     private void OnDestroy()
     {
-        Destroy(gameObject);
-        BuildManager.instance.SetTurretToBuild(null);
+        foreach(ShopPanelItemController controller in FindObjectsOfType<ShopPanelItemController>())
+        {
+            controller.OnUnselect();
+        }
     }
 }
