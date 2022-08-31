@@ -88,16 +88,10 @@ MonoBehaviour:
   - type: 13
     prefab: {fileID: 1468284063984142259, guid: 695863740c170f04aae047688d7270dc, type: 3}
   - type: 14
-    prefab: {fileID: 919132149155446097, guid: e59a44a7a3d11b544bc6938c3fd1224d, type: 3}
-  - type: 15
-    prefab: {fileID: 919132149155446097, guid: a5dae4cc51a3e5a4a8a970ed089b629e, type: 3}
-  - type: 16
-    prefab: {fileID: 919132149155446097, guid: bc67fd1a160507345a2f38a8dae9465b, type: 3}
-  - type: 17
     prefab: {fileID: 7101821495244308373, guid: 782dd8b289121244599893fae8db2eae, type: 3}
-  - type: 18
+  - type: 15
     prefab: {fileID: 2833107975168705719, guid: e74c06c089a682146864ebd51529487e, type: 3}
-  - type: 19
+  - type: 16
     prefab: {fileID: 2570154439271328233, guid: d4214b7934475224e9caf14397bb539a, type: 3}
 --- !u!114 &-4016883339765756810
 MonoBehaviour:

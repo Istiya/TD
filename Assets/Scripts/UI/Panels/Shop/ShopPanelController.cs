@@ -37,7 +37,7 @@ public class ShopPanelController : MonoBehaviour
         }
         else
         {
-            StartCoroutine(ChangeMoneyColor());
+            StartCoroutine(MoneyController.instance.ChangeMoneyColor());
             Debug.Log("Not enough money!");
         }
     }
@@ -66,7 +66,7 @@ public class ShopPanelController : MonoBehaviour
         }
         else
         {
-            StartCoroutine(ChangeMoneyColor());
+            StartCoroutine(MoneyController.instance.ChangeMoneyColor());
             Debug.Log("Not enough money!");
         }
 
@@ -75,26 +75,5 @@ public class ShopPanelController : MonoBehaviour
     public void PurchaseTrianglesTurret()
     {
         
-    }
-
-    IEnumerator ChangeMoneyColor()
-    {
-        for(int i = 0; i < 2; i++)
-        {
-            MoneyController.instance.money.color = Color.red;
-            yield return new WaitForSeconds(0.5f);
-            MoneyController.instance.money.color = Color.white;
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
-
-    public IEnumerator DoWaitUntilDestroy()
-    {
-        yield return new WaitUntil(() => ChoosenTurretController.instance == null);
-    }
-
-    public void WaitUntilDestroy()
-    {
-        StartCoroutine(DoWaitUntilDestroy());
     }
 }

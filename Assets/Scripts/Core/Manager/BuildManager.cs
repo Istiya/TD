@@ -47,4 +47,16 @@ public class BuildManager : MonoBehaviour
             }
         }
     }
+
+    public void UpgradeTurret(TurretModel model)
+    {
+        if(GameManager.instance.GetMoney() >= (int)model.cost && model.upgradeNumber <= 2)
+        {
+            model.fireRate++;
+            model.range++;
+            model.upgradeNumber++;
+            FindObjectOfType<TurretInfoPanel>().Init(model);
+            GameManager.instance.ChangeMoney(-(int)model.cost);
+        }
+    }
 }

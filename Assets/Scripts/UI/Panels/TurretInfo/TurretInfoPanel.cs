@@ -47,12 +47,20 @@ public class TurretInfoPanel : MonoBehaviour
         _model = model;
         image.sprite = _model.sprite;
         turretName.text = _model.turretName;
-        cost.text += ((int)_model.cost);
+        cost.text = ((int)_model.cost).ToString();
         int turretDamage = PrefabManager.instance.Get(_model.projectilePrefab).GetComponent<ProjectileModel>().damage.damage * _model.firePoint.Length;
-        damage.text += turretDamage.ToString();
-        DPS.text += turretDamage / _model.fireRate;
-        fireRate.text += _model.fireRate.ToString();
-        range.text += _model.range.ToString();
+        damage.text = turretDamage.ToString();
+        DPS.text = (turretDamage * _model.fireRate).ToString();
+        fireRate.text = _model.fireRate.ToString();
+        range.text = _model.range.ToString();
+        if (_model.GetComponent<LineRenderer>())
+        {
+            CircleDrawer.DrawCircle(_model.gameObject, _model.range, 0.05f, _model.GetComponent<LineRenderer>());
+        }
+        else
+        {
+            CircleDrawer.DrawCircle(_model.gameObject, _model.range, 0.05f);
+        }
     }
 
     public void OnSellButtonPressed()
@@ -63,7 +71,7 @@ public class TurretInfoPanel : MonoBehaviour
 
     public void OnUpgradeButtonPressed()
     {
-        Debug.Log("Upgraded!");
+        BuildManager.instance.UpgradeTurret(_model);
     }
 
 
@@ -72,6 +80,7 @@ public class TurretInfoPanel : MonoBehaviour
         if (_model != null)
         {
             _model.gameObject.GetComponent<TurretController>().Unselect();
+            Destroy(_model.GetComponent<LineRenderer>());
         }
     }
 }

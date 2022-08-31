@@ -16,6 +16,7 @@ public class TurretModel : MonoBehaviour
     public float turnSpeed = 10f;
     public float fireRate = 1f;
     public TurretCost cost;
+    public int upgradeNumber = 0;
 
     public string controller;
 
